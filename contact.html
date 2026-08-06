@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — RK Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#081826;
+    --navy-800:#0B2338;
+    --navy-700:#123A56;
+    --navy-600:#184F73;
+    --blue-500:#3C8DC0;
+    --gold-400:#F0AE4E;
+    --gold-300:#F5D68A;
+    --paper:#F7F5F0;
+    --ink:#0B2338;
+    --ink-soft:#5B6B78;
+    --line:#E4E1D8;
+    --radius:14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:'Manrope', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+
+  .page{
+    max-width:1440px;
+    margin:0 auto;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* NAV */
+  nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 48px;
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .logo-mark{
+    width:38px; height:38px;
+    background:var(--navy-700);
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold-300);
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:16px;
+  }
+  .logo-text{
+    line-height:1.1;
+  }
+  .logo-text .name{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:17px;
+    color:var(--navy-800);
+    letter-spacing:0.01em;
+  }
+  .logo-text .tag{
+    font-size:10.5px;
+    color:var(--ink-soft);
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+  .nav-links{
+    display:flex;
+    gap:34px;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--navy-800);
+  }
+  .nav-links a{
+    position:relative;
+    padding-bottom:4px;
+    opacity:0.85;
+  }
+  .nav-links a.active{opacity:1;}
+  .nav-links a.active::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-2px;
+    height:2px;
+    background:var(--gold-400);
+    border-radius:2px;
+  }
+  .nav-cta{
+    background:var(--navy-800);
+    color:#fff;
+    padding:11px 20px;
+    border-radius:9px;
+    font-size:13.5px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+
+  /* HERO */
+  .hero{
+    flex:1;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:0;
+    background:linear-gradient(120deg, rgba(8,24,38,0.75) 0%, rgba(18,58,86,0.7) 100%), url('images/hero-background.png');
+    background-size:cover;
+    background-position:center;
+    padding:60px 48px;
+    align-items:center;
+    min-height:0;
+  }
+  .hero-copy .eyebrow{
+    color:var(--gold-300);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .hero-copy h1{
+    font-size:48px;
+    line-height:1.12;
+    color:#fff;
+    margin-bottom:20px;
+  }
+  .hero-copy h1 .accent{ color:var(--gold-400); }
+  .hero-copy p{
+    font-size:17px;
+    line-height:1.65;
+    color:#C7D3DC;
+    max-width:440px;
+    margin-bottom:30px;
+  }
+  .hero-actions{
+    display:flex;
+    gap:14px;
+  }
+  .btn-primary{
+    background:var(--gold-400);
+    color:var(--navy-900);
+    font-weight:700;
+    font-size:14px;
+    padding:13px 24px;
+    border-radius:9px;
+  }
+  .btn-ghost{
+    border:1px solid rgba(255,255,255,0.35);
+    color:#fff;
+    font-weight:600;
+    font-size:14px;
+    padding:13px 24px;
+    border-radius:9px;
+  }
+
+  /* Dashboard mockup */
+  .mock-wrap{ display:flex; justify-content:center; }
+  .mock-frame{
+    width:100%;
+    max-width:480px;
+    background:#0F2D44;
+    border-radius:12px;
+    border:1px solid #1E4C6B;
+    padding:16px;
+  }
+  .mock-topbar{
+    display:flex; gap:6px; margin-bottom:14px;
+  }
+  .mock-dot{ width:8px; height:8px; border-radius:50%; }
+  .mock-dot:nth-child(1){background:#E0665F;}
+  .mock-dot:nth-child(2){background:#EFC14C;}
+  .mock-dot:nth-child(3){background:#5FBF8F;}
+  .mock-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
+  .mock-card{
+    background:#123A56;
+    border-radius:8px;
+    padding:12px;
+  }
+  .mock-label{
+    font-size:9.5px;
+    color:#8FB0C7;
+    margin-bottom:6px;
+    font-family:'Manrope',sans-serif;
+  }
+  .mock-value{
+    font-size:16px;
+    font-weight:700;
+    color:var(--gold-300);
+    font-family:'Manrope',sans-serif;
+  }
+  .mock-bars{ display:flex; align-items:flex-end; gap:4px; height:44px; margin-top:8px;}
+  .mock-bars span{ flex:1; background:var(--blue-500); border-radius:2px 2px 0 0;}
+  .mock-bars span.hi{ background:var(--gold-400); }
+  .mock-line{ height:40px; margin-top:6px; }
+
+  /* TRUST BAR */
+  .trust{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    background:#fff;
+    border-bottom:1px solid var(--line);
+    padding:22px 48px;
+  }
+  .trust-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    justify-content:center;
+    border-right:1px solid var(--line);
+  }
+  .trust-item:last-child{ border-right:none; }
+  .trust-icon{
+    width:34px; height:34px;
+    border-radius:50%;
+    background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--navy-700);
+    font-size:15px;
+    flex-shrink:0;
+  }
+  .trust-text .num{
+    font-weight:800;
+    font-size:15px;
+    color:var(--navy-800);
+    line-height:1.2;
+  }
+  .trust-text .label{
+    font-size:11.5px;
+    color:var(--ink-soft);
+  }
+
+  /* WHAT WE DO */
+  .section{
+    padding:34px 48px;
+  }
+  .section-head{
+    text-align:center;
+    margin-bottom:22px;
+  }
+  .section-head h2{
+    font-size:26px;
+    color:var(--navy-800);
+    margin-bottom:6px;
+  }
+  .section-head p{
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
+  }
+  .service-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 16px;
+  }
+  .service-icon{
+    width:32px; height:32px;
+    border-radius:8px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    font-weight:700;
+    margin-bottom:12px;
+    color:#fff;
+  }
+  .service-card h3{
+    font-size:15.5px;
+    font-family:'Manrope', sans-serif;
+    font-weight:700;
+    color:var(--navy-800);
+    margin-bottom:8px;
+  }
+  .service-card ul li{
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:5px;
+    padding-left:12px;
+    position:relative;
+  }
+  .service-card ul li::before{
+    content:"–";
+    position:absolute; left:0; color:var(--gold-400);
+  }
+  .service-card .learn{
+    display:inline-block;
+    margin-top:10px;
+    font-size:12px;
+    font-weight:700;
+    color:var(--navy-600);
+  }
+
+  /* PROJECTS + TESTIMONIAL */
+  .split{
+    display:grid;
+    grid-template-columns:2.1fr 1fr;
+    gap:16px;
+  }
+  .projects-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:14px;
+  }
+  .projects-head h2{ font-size:20px; color:var(--navy-800);}
+  .projects-head span{ font-size:13px; color:var(--ink-soft);}
+  .projects-head .view-all{ font-size:12.5px; font-weight:700; color:var(--navy-600);}
+  .projects-row{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+  }
+  .proj-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .proj-thumb{
+    height:70px;
+    background:var(--navy-700);
+    position:relative;
+  }
+  .proj-thumb .b{ position:absolute; bottom:8px; left:8px; display:flex; gap:3px; align-items:flex-end; height:24px;}
+  .proj-thumb .b span{ width:5px; background:var(--gold-400); border-radius:1px;}
+  .proj-info{ padding:9px 10px; }
+  .proj-info .t{ font-size:11.5px; font-weight:700; color:var(--navy-800); margin-bottom:2px;}
+  .proj-info .s{ font-size:10px; color:var(--ink-soft);}
+
+  .testimonial-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .testimonial-card .quote-mark{
+    font-family:'Fraunces', serif;
+    font-size:34px;
+    color:var(--gold-400);
+    line-height:1;
+    margin-bottom:6px;
+  }
+  .testimonial-card p{
+    font-size:13px;
+    color:var(--ink);
+    line-height:1.55;
+    margin-bottom:12px;
+  }
+  .stars{ color:var(--gold-400); font-size:13px; margin-bottom:8px; }
+  .testimonial-card .who{ font-size:12.5px; font-weight:700; color:var(--navy-800);}
+  .testimonial-card .role{ font-size:11px; color:var(--ink-soft);}
+
+  /* FOOTER CTA */
+  footer{
+    background:var(--navy-800);
+    color:#fff;
+    padding:24px 48px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .foot-benefits{
+    display:flex;
+    gap:28px;
+  }
+  .foot-b{ display:flex; align-items:center; gap:10px; }
+  .foot-b .ic{
+    width:30px; height:30px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.3);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px;
+    color:var(--gold-300);
+    flex-shrink:0;
+  }
+  .foot-b .txt .h{ font-size:12.5px; font-weight:700; }
+  .foot-b .txt .s{ font-size:10.5px; color:#AFC0CE; }
+  .foot-cta{
+    background:#0D2A40;
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:10px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+  }
+  .foot-cta .h{ font-size:13px; font-weight:700; margin-bottom:2px;}
+  .foot-cta .s{ font-size:11px; color:#AFC0CE; }
+  .foot-cta .btn-primary{ padding:10px 18px; font-size:12.5px; white-space:nowrap; }
+
+  /* SOLUTIONS WE BUILD */
+  .solutions-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .solution-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:18px 16px;
+  }
+  .solution-card h3{
+    font-size:15.5px;
+    font-family:'Manrope', sans-serif;
+    font-weight:700;
+    color:var(--navy-800);
+    margin-bottom:6px;
+  }
+  .solution-card p{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+
+  /* WHAT CLIENTS SAY - screenshot gallery */
+  .clients-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .client-shot{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(11,35,56,0.06);
+  }
+  .client-shot img{ width:100%; display:block; }
+
+  /* READY TO AUTOMATE - contact buttons section */
+  .cta-section{
+    background:var(--navy-800);
+    padding:44px 48px;
+    text-align:center;
+  }
+  .cta-section h2{ color:#fff; font-size:26px; margin-bottom:10px; }
+  .cta-section p{ color:#C7D3DC; font-size:14.5px; max-width:520px; margin:0 auto 26px; }
+  .cta-buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    max-width:820px;
+    margin:0 auto;
+  }
+  .cta-btn{
+    background:#fff;
+    color:var(--navy-800);
+    font-weight:700;
+    font-size:14.5px;
+    padding:14px 12px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .cta-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 22px rgba(0,0,0,0.25); }
+
+  /* ABOUT / CONTACT PAGE */
+  .about-wrap{
+    display:grid;
+    grid-template-columns:0.85fr 1.15fr;
+    gap:40px;
+    padding:44px 48px;
+    align-items:center;
+  }
+  .about-photo{
+    width:100%;
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--navy-700);
+    aspect-ratio:1/1.15;
+  }
+  .about-photo img{ width:100%; height:100%; object-fit:cover; }
+  .about-copy .hi{ color:var(--gold-400); font-size:24px; margin-bottom:14px; }
+  .about-copy p{ font-size:16px; line-height:1.7; color:var(--ink-soft); margin-bottom:14px; }
+  .pill-row{ display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; }
+  .pill{
+    background:var(--paper);
+    border:1px solid var(--line);
+    color:var(--navy-700);
+    font-size:13px;
+    font-weight:600;
+    padding:7px 13px;
+    border-radius:999px;
+  }
+  .badge-row{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:24px; }
+  .badge{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:9px 14px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--navy-800);
+  }
+
+  @media (max-width: 1100px){
+    .services-grid{ grid-template-columns:repeat(3,1fr); }
+    .projects-row{ grid-template-columns:repeat(3,1fr); }
+    .split{ grid-template-columns:1fr; }
+    .hero{ grid-template-columns:1fr; }
+    .trust{ grid-template-columns:repeat(3,1fr); }
+    .foot-benefits{ flex-wrap:wrap; row-gap:14px; }
+    .solutions-grid{ grid-template-columns:repeat(2,1fr); }
+    .clients-grid{ grid-template-columns:repeat(2,1fr); }
+    .cta-buttons{ grid-template-columns:repeat(2,1fr); }
+    .about-wrap{ grid-template-columns:1fr; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+
+  /* Scroll-reveal: elements slide in as you scroll to them (PowerPoint-style entrance) */
+  [data-reveal]{
+    opacity:0;
+    transition:opacity 0.7s ease, transform 0.7s cubic-bezier(.2,.7,.3,1);
+    will-change:transform, opacity;
+  }
+  [data-reveal="left"]{ transform:translateX(-60px); }
+  [data-reveal="right"]{ transform:translateX(60px); }
+  [data-reveal="up"]{ transform:translateY(40px); }
+  [data-reveal].is-visible{
+    opacity:1;
+    transform:none;
+  }
+  /* stagger children of a revealed group */
+  [data-reveal-group] > *{ transition-delay: calc(var(--i, 0) * 90ms); }
+
+  /* Letter shake on the accent hero word */
+  .accent{ display:inline-block; }
+  .accent span{
+    display:inline-block;
+    animation:letterShake 2.6s ease-in-out infinite;
+  }
+  .accent span:nth-child(1){ animation-delay:0.00s; }
+  .accent span:nth-child(2){ animation-delay:0.06s; }
+  .accent span:nth-child(3){ animation-delay:0.12s; }
+  .accent span:nth-child(4){ animation-delay:0.18s; }
+  .accent span:nth-child(5){ animation-delay:0.24s; }
+  .accent span:nth-child(6){ animation-delay:0.30s; }
+  .accent span:nth-child(7){ animation-delay:0.36s; }
+  @keyframes letterShake{
+    0%, 100%{ transform:translateY(0) rotate(0deg); }
+    10%{ transform:translateY(-3px) rotate(-3deg); }
+    20%{ transform:translateY(1px) rotate(2deg); }
+    30%{ transform:translateY(-2px) rotate(-1deg); }
+    40%, 90%{ transform:translateY(0) rotate(0deg); }
+  }
+
+  /* Shine sweep across buttons on hover */
+  .btn-primary, .btn-ghost{
+    position:relative;
+    overflow:hidden;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .btn-primary::after, .btn-ghost::after{
+    content:"";
+    position:absolute;
+    top:0; left:-120%;
+    width:60%; height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform:skewX(-20deg);
+    transition:left 0.6s ease;
+  }
+  .btn-primary:hover::after, .btn-ghost:hover::after{ left:130%; }
+  .btn-primary:hover, .btn-ghost:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(240,174,78,0.28);
+  }
+
+  /* Slow ambient shine sweep across the dashboard mockup */
+  .mock-frame{ position:relative; overflow:hidden; }
+  .mock-frame::after{
+    content:"";
+    position:absolute;
+    top:0; left:-160%;
+    width:60%; height:100%;
+    background:linear-gradient(115deg, transparent, rgba(255,255,255,0.10), transparent);
+    transform:skewX(-20deg);
+    animation:mockShine 5s ease-in-out infinite;
+  }
+  @keyframes mockShine{
+    0%{ left:-160%; }
+    35%{ left:160%; }
+    100%{ left:160%; }
+  }
+
+  /* Chart bars grow in, line draws in, once revealed */
+  .mock-bars span{ transform:scaleY(0); transform-origin:bottom; transition:transform 0.8s cubic-bezier(.2,.8,.3,1); }
+  .is-visible .mock-bars span{ transform:scaleY(1); }
+  .mock-bars span:nth-child(1){ transition-delay:0.05s; }
+  .mock-bars span:nth-child(2){ transition-delay:0.15s; }
+  .mock-bars span:nth-child(3){ transition-delay:0.25s; }
+  .mock-bars span:nth-child(4){ transition-delay:0.35s; }
+  .mock-bars span:nth-child(5){ transition-delay:0.45s; }
+
+  .mock-line polyline{
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+    transition:stroke-dashoffset 1.4s ease 0.2s;
+  }
+  .is-visible .mock-line polyline{ stroke-dashoffset:0; }
+
+  /* Card hover lift */
+  .service-card, .proj-card, .testimonial-card{
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .service-card:hover, .proj-card:hover, .testimonial-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 14px 30px rgba(11,35,56,0.10);
+  }
+
+  /* Trust bar numbers count-up handled via JS; gentle icon pulse */
+  .trust-icon{ transition:transform 0.3s ease; }
+  .trust-item:hover .trust-icon{ transform:scale(1.12); }
+
+  /* Nav CTA subtle breathing */
+  .nav-cta{
+    animation:navPulse 3.5s ease-in-out infinite;
+  }
+  @keyframes navPulse{
+    0%, 100%{ box-shadow:0 0 0 0 rgba(11,35,56,0.0); }
+    50%{ box-shadow:0 0 0 6px rgba(11,35,56,0.06); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    [data-reveal]{ opacity:1; transform:none; transition:none; }
+    .accent span, .mock-frame::after, .nav-cta{ animation:none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav>
+    <div class="logo">
+      <div class="logo-mark">RK</div>
+      <div class="logo-text">
+        <div class="name">RK Analytics</div>
+        <div class="tag">Automate · Analyze · Accelerate</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#solutions">Solutions</a>
+      <a href="index.html#projects">Projects</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+    <a href="#get-started" class="nav-cta">Get free consultation</a>
+  </nav>
+
+  <section class="about-wrap" data-reveal-group>
+    <div class="about-photo" data-reveal="left" style="--i:0">
+      <img src="images/image6.jpg" alt="Ranjithkumar Ganesan" onerror="this.style.display='none'">
+    </div>
+    <div class="about-copy" data-reveal="right" style="--i:1">
+      <div class="hi">Hi, I'm Ranjithkumar Ganesan.</div>
+      <p>I help businesses automate manual work, build intelligent spreadsheet solutions, and create interactive dashboards that save time and improve decision-making.</p>
+      <p>With experience delivering automation solutions for clients across multiple industries, I specialize in Microsoft Excel, Google Sheets, Google Apps Script, Power BI, Smartsheet, VBA, and Power Query.</p>
+
+      <div class="pill-row">
+        <span class="pill">Excel automation</span>
+        <span class="pill">Google Sheets</span>
+        <span class="pill">Apps Script</span>
+        <span class="pill">Power BI</span>
+        <span class="pill">Smartsheet</span>
+        <span class="pill">Power Query</span>
+        <span class="pill">VBA macros</span>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge">⭐ Top Rated Freelancer</span>
+        <span class="badge">⭐ 100% Job Success</span>
+        <span class="badge">Clear Communication</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section" id="get-started" data-reveal="up">
+    <h2>Ready to build smarter business solutions?</h2>
+    <p>Need to automate your business, build dashboards, or streamline reporting? I'd be happy to discuss your requirements and recommend the right solution.</p>
+    <div class="cta-buttons">
+      <a class="cta-btn" href="mailto:ranjith@rkanalytics.in">✉ Email me</a>
+      <a class="cta-btn" href="https://wa.me/919360691978" target="_blank">💬 WhatsApp</a>
+      <a class="cta-btn" href="#" target="_blank"><!-- put your real Upwork profile link here -->💼 Upwork profile</a>
+      <a class="cta-btn" href="#" target="_blank"><!-- put your real LinkedIn profile link here -->🔗 LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot-benefits">
+      <div class="foot-b"><div class="ic">⏱</div><div class="txt"><div class="h">Save time</div><div class="s">Automate repetitive tasks</div></div></div>
+      <div class="foot-b"><div class="ic">✓</div><div class="txt"><div class="h">Reduce errors</div><div class="s">Accurate & reliable</div></div></div>
+      <div class="foot-b"><div class="ic">↗</div><div class="txt"><div class="h">Better insights</div><div class="s">Data-driven decisions</div></div></div>
+      <div class="foot-b"><div class="ic">⚙</div><div class="txt"><div class="h">Scalable</div><div class="s">Built for growth</div></div></div>
+    </div>
+    <div class="foot-cta">
+      <div>
+        <div class="h">Have a project in mind?</div>
+        <div class="s">Let's discuss how we can help your business grow.</div>
+      </div>
+      <a class="btn-primary" href="mailto:ranjith@rkanalytics.in">Get free consultation →</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll-reveal: elements marked [data-reveal] fade/slide in the first time
+  // they enter the viewport, like PowerPoint entrance animations.
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
