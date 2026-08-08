@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>RK Analytics — Automate. Analyze. Accelerate.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
@@ -55,6 +55,9 @@
     padding:22px 48px;
     border-bottom:1px solid var(--line);
     background:var(--paper);
+    position:sticky;
+    top:0;
+    z-index:100;
   }
   .logo{
     display:flex;
@@ -323,34 +326,28 @@
     grid-template-columns:2.1fr 1fr;
     gap:16px;
   }
-  .projects-head{
-    text-align:center;
-    margin-bottom:22px;
-  }
-  .projects-head h2{ font-size:20px; color:var(--navy-800);}
-  .projects-head span{ font-size:13px; color:var(--ink-soft);}
-  .projects-head .view-all{ font-size:12.5px; font-weight:700; color:var(--navy-600);}
   .projects-row{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:10px;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
   }
   .proj-card{
     background:#fff;
     border:1px solid var(--line);
-    border-radius:10px;
+    border-radius:var(--radius);
     overflow:hidden;
   }
   .proj-thumb{
-    height:70px;
+    height:140px;
     background:var(--navy-700);
     position:relative;
   }
+  .proj-thumb img{ width:100%; height:100%; object-fit:cover; }
   .proj-thumb .b{ position:absolute; bottom:8px; left:8px; display:flex; gap:3px; align-items:flex-end; height:24px;}
   .proj-thumb .b span{ width:5px; background:var(--gold-400); border-radius:1px;}
-  .proj-info{ padding:9px 10px; }
-  .proj-info .t{ font-size:11.5px; font-weight:700; color:var(--navy-800); margin-bottom:2px;}
-  .proj-info .s{ font-size:10px; color:var(--ink-soft);}
+  .proj-info{ padding:14px 16px; }
+  .proj-info .t{ font-size:15.5px; font-weight:700; color:var(--navy-800); margin-bottom:4px; font-family:'Manrope', sans-serif;}
+  .proj-info .s{ font-size:13px; color:var(--ink-soft);}
 
   .testimonial-card{
     background:#fff;
@@ -529,12 +526,12 @@
 
   @media (max-width: 1100px){
     .services-grid{ grid-template-columns:repeat(3,1fr); }
-    .projects-row{ grid-template-columns:repeat(3,1fr); }
     .split{ grid-template-columns:1fr; }
     .hero{ grid-template-columns:1fr; }
     .trust{ grid-template-columns:repeat(3,1fr); }
     .foot-benefits{ flex-wrap:wrap; row-gap:14px; }
     .solutions-grid{ grid-template-columns:repeat(2,1fr); }
+    .projects-row{ grid-template-columns:repeat(2,1fr); }
     .clients-grid{ grid-template-columns:repeat(2,1fr); }
     .cta-buttons{ grid-template-columns:repeat(2,1fr); }
     .about-wrap{ grid-template-columns:1fr; }
@@ -634,10 +631,10 @@
   .is-visible .mock-line polyline{ stroke-dashoffset:0; }
 
   /* Card hover lift */
-  .service-card, .proj-card, .testimonial-card{
+  .service-card, .proj-card, .testimonial-card, .solution-card{
     transition:transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .service-card:hover, .proj-card:hover, .testimonial-card:hover{
+  .service-card:hover, .proj-card:hover, .testimonial-card:hover, .solution-card:hover{
     transform:translateY(-5px);
     box-shadow:0 14px 30px rgba(11,35,56,0.10);
   }
@@ -689,12 +686,12 @@
   .section{ padding:24px 20px; }
   .services-grid,
   .solutions-grid,
+  .projects-row,
   .clients-grid,
   .cta-buttons,
   .split{
     grid-template-columns:1fr;
   }
-  .projects-row{ grid-template-columns:repeat(2,1fr); }
   .about-wrap{
     padding:24px 20px;
     grid-template-columns:1fr;
@@ -852,11 +849,9 @@
   </section>
 
   <section class="section" id="projects">
-    <div class="projects-head">
-      <div>
-        <h2>Recent projects</h2>
-        <span>Solutions we've delivered for clients across different industries.</span>
-      </div>
+    <div class="section-head">
+      <h2>Recent projects</h2>
+      <p>Solutions we've delivered for clients across different industries.</p>
     </div>
     <div class="projects-row" data-reveal-group>
       <div class="proj-card" data-reveal="up" style="--i:0">
@@ -872,7 +867,7 @@
         <div class="proj-info"><div class="t">Construction dashboard</div><div class="s">Smartsheet + Automation</div></div>
       </div>
       <div class="proj-card" data-reveal="up" style="--i:3">
-        <div class="proj-thumb"><img src="project4.jpg" alt="Google Forjp to PDF automation" onerror="this.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:35%&quot;></span><span style=&quot;height:75%&quot;></span><span style=&quot;height:50%&quot;></span></div>'"></div>
+        <div class="proj-thumb"><img src="project4.jpg" alt="Google Forms to PDF automation" onerror="this.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:35%&quot;></span><span style=&quot;height:75%&quot;></span><span style=&quot;height:50%&quot;></span></div>'"></div>
         <div class="proj-info"><div class="t">Forms → PDF automation</div><div class="s">Apps Script + Email</div></div>
       </div>
       <div class="proj-card" data-reveal="up" style="--i:4">
