@@ -961,7 +961,7 @@ nav.nav-hidden{
       if (window.scrollY > 80) {           // don't hide if still at top of page
         navEl.classList.add('nav-hidden');
       }
-    }, 1500);                               // hides after 1.5 seconds of no activity
+    }, 750);                               // hides after .75 seconds of no activity
   }
 
   window.addEventListener('scroll', () => {
