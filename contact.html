@@ -824,6 +824,12 @@ nav.nav-hidden{
     }
     lastScroll = currentScroll;
   });
+   // Show menu if mouse moves near top of screen
+  document.addEventListener('mousemove', (e) => {
+    if (e.clientY < 60) {
+      navEl.classList.remove('nav-hidden');
+    }
+  });
 </script>
   
 </body>
