@@ -58,7 +58,11 @@
     position:sticky;
     top:0;
     z-index:100;
-  }
+    transition:transform 0.3s ease;
+}
+nav.nav-hidden{
+    transform:translateY(-100%);
+}
   .logo{
     display:flex;
     align-items:center;
@@ -942,6 +946,47 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
   revealEls.forEach(el => observer.observe(el));
+</script>
+<script>
+  let lastScroll = 0;
+  const navEl = document.querySelector('nav');
+  let hideTimer;
+
+  function showNav(){
+    navEl.classList.remove('nav-hidden');
+  }
+  function scheduleHide(){
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      if (window.scrollY > 80) {           // don't hide if still at top of page
+        navEl.classList.add('nav-hidden');
+      }
+    }, 2500);                               // hides after 2.5 seconds of no activity
+  }
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      navEl.classList.add('nav-hidden');    // scrolling down → hide
+      clearTimeout(hideTimer);
+    } else {
+      showNav();                            // scrolling up → show
+      scheduleHide();
+    }
+    lastScroll = currentScroll;
+  });
+
+  // Show menu if mouse moves near top of screen, then auto-hide again
+  document.addEventListener('mousemove', (e) => {
+    if (e.clientY < 60) {
+      showNav();
+      scheduleHide();
+    }
+  });
+
+  // Keep menu open while hovering directly over it
+  navEl.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+  navEl.addEventListener('mouseleave', () => scheduleHide());
 </script>
 
 </body>
