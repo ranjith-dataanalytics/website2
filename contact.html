@@ -58,7 +58,11 @@
     position:sticky;
     top:0;
     z-index:100;
-  }
+    transition:transform 0.3s ease;
+}
+nav.nav-hidden{
+    transform:translateY(-100%);
+}
   .logo{
     display:flex;
     align-items:center;
@@ -808,6 +812,19 @@
 
   revealEls.forEach(el => observer.observe(el));
 </script>
-
+<script>
+  let lastScroll = 0;
+  const navEl = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+    if (currentScroll > lastScroll && currentScroll > 80) {
+      navEl.classList.add('nav-hidden');   // scrolling down → hide
+    } else {
+      navEl.classList.remove('nav-hidden'); // scrolling up → show
+    }
+    lastScroll = currentScroll;
+  });
+</script>
+  
 </body>
 </html>
