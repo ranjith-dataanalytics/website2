@@ -653,6 +653,48 @@ nav.nav-hidden{
     [data-reveal]{ opacity:1; transform:none; transition:none; }
     .accent span, .mock-frame::after, .nav-cta{ animation:none; }
   }
+
+  /* LIGHTBOX POPUP */
+  .lightbox-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(8,24,38,0.82);
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+  }
+  .lightbox-overlay.open{ display:flex; }
+  .lightbox-box{
+    background:#fff;
+    border-radius:12px;
+    padding:10px;
+    max-width:480px;
+    max-height:80vh;
+    width:100%;
+    position:relative;
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  }
+  .lightbox-box img{
+    width:100%;
+    height:auto;
+    max-height:70vh;
+    object-fit:contain;
+    border-radius:6px;
+  }
+  .lightbox-close{
+    position:absolute;
+    top:-14px; right:-14px;
+    width:32px; height:32px;
+    border-radius:50%;
+    background:var(--navy-800);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px;
+    cursor:pointer;
+    border:2px solid #fff;
+  }
   @media (max-width: 640px){
   nav{
     flex-wrap:wrap;
@@ -852,27 +894,27 @@ nav.nav-hidden{
     </div>
     <div class="projects-row" data-reveal-group>
       <div class="proj-card" data-reveal="up" style="--i:0">
-        <div class="proj-thumb"><a href="project17.jpg" target="_blank"><img src="project17.jpg" alt="Investment portfolio tracker" onerror="this.parentElement.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:30%&quot;></span><span style=&quot;height:60%&quot;></span><span style=&quot;height:45%&quot;></span></div>'"></a></div>
+        <div class="proj-thumb"><img src="project17.jpg" alt="Investment portfolio tracker" onclick="openLightbox('project17.jpg')" onerror="this.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:30%&quot;></span><span style=&quot;height:60%&quot;></span><span style=&quot;height:45%&quot;></span></div>'"></div>
         <div class="proj-info"><div class="t">Investment portfolio tracker</div><div class="s">Sheets + Google Finance</div></div>
       </div>
       <div class="proj-card" data-reveal="up" style="--i:1">
-        <div class="proj-thumb"><a href="project2.png" target="_blank"><img src="project2.png" alt="Motorcycle parts database" onerror="this.parentElement.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:50%&quot;></span><span style=&quot;height:20%&quot;></span><span style=&quot;height:70%&quot;></span></div>'"></a></div>
+        <div class="proj-thumb"><img src="project2.png" alt="Motorcycle parts database" onclick="openLightbox('project2.png')" onerror="this.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:50%&quot;></span><span style=&quot;height:20%&quot;></span><span style=&quot;height:70%&quot;></span></div>'"></div>
         <div class="proj-info"><div class="t">Motorcycle parts database</div><div class="s">Excel + Power Query + VBA</div></div>
       </div>
       <div class="proj-card" data-reveal="up" style="--i:2">
-        <div class="proj-thumb"><a href="project3.png" target="_blank"><img src="project3.png" alt="Smartsheet construction dashboard" onerror="this.parentElement.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:65%&quot;></span><span style=&quot;height:40%&quot;></span><span style=&quot;height:55%&quot;></span></div>'"></a></div>
+        <div class="proj-thumb"><img src="project3.png" alt="Smartsheet construction dashboard" onclick="openLightbox('project3.png')" onerror="this.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:65%&quot;></span><span style=&quot;height:40%&quot;></span><span style=&quot;height:55%&quot;></span></div>'"></div>
         <div class="proj-info"><div class="t">Construction dashboard</div><div class="s">Smartsheet + Automation</div></div>
       </div>
       <div class="proj-card" data-reveal="up" style="--i:3">
-        <div class="proj-thumb"><a href="project4.png" target="_blank"><img src="project4.png" alt="Google Forms to PDF automation" onerror="this.parentElement.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:35%&quot;></span><span style=&quot;height:75%&quot;></span><span style=&quot;height:50%&quot;></span></div>'"></a></div>
+        <div class="proj-thumb"><img src="project4.png" alt="Google Forms to PDF automation" onclick="openLightbox('project4.png')" onerror="this.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:35%&quot;></span><span style=&quot;height:75%&quot;></span><span style=&quot;height:50%&quot;></span></div>'"></div>
         <div class="proj-info"><div class="t">Forms → PDF automation</div><div class="s">Google Sheet+ Apps Script</div></div>
       </div>
       <div class="proj-card" data-reveal="up" style="--i:4">
-        <div class="proj-thumb"><a href="project55.png" target="_blank"><img src="project55.png" alt="Financial dashboard" onerror="this.parentElement.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:55%&quot;></span><span style=&quot;height:30%&quot;></span><span style=&quot;height:65%&quot;></span></div>'"></a></div>
+        <div class="proj-thumb"><img src="project55.png" alt="Financial dashboard" onclick="openLightbox('project55.png')" onerror="this.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:55%&quot;></span><span style=&quot;height:30%&quot;></span><span style=&quot;height:65%&quot;></span></div>'"></div>
         <div class="proj-info"><div class="t">Grant Financial Reporting &amp; Reconciliation</div><div class="s">Excel + Data Consolidation</div></div>
       </div>
       <div class="proj-card" data-reveal="up" style="--i:5">
-        <div class="proj-thumb"><a href="project6.png" target="_blank"><img src="project6.png" alt="Retail Inventory & Daily Stock Management" onerror="this.parentElement.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:45%&quot;></span><span style=&quot;height:65%&quot;></span><span style=&quot;height:35%&quot;></span></div>'"></a></div>
+        <div class="proj-thumb"><img src="project6.png" alt="Retail Inventory & Daily Stock Management" onclick="openLightbox('project6.png')" onerror="this.parentElement.innerHTML='<div class=&quot;b&quot;><span style=&quot;height:45%&quot;></span><span style=&quot;height:65%&quot;></span><span style=&quot;height:35%&quot;></span></div>'"></div>
         <div class="proj-info"><div class="t">Retail Inventory &amp; Daily Stock Management</div><div class="s">Google Sheets + Automation</div></div>
       </div>
     </div>
@@ -921,6 +963,26 @@ nav.nav-hidden{
   </footer>
 
 </div>
+
+<div class="lightbox-overlay" id="lightbox" onclick="if(event.target===this) closeLightbox()">
+  <div class="lightbox-box">
+    <div class="lightbox-close" onclick="closeLightbox()">✕</div>
+    <img id="lightbox-img" src="" alt="Project preview">
+  </div>
+</div>
+
+<script>
+  function openLightbox(src){
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+  }
+  function closeLightbox(){
+    document.getElementById('lightbox').classList.remove('open');
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
 
 <script>
   const revealEls = document.querySelectorAll('[data-reveal]');
