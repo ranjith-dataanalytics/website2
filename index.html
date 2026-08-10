@@ -738,13 +738,46 @@ nav.nav-hidden{
     padding-bottom:12px;
   }
   .section{ padding:24px 20px; }
-  .services-grid,
-  .solutions-grid,
-  .projects-row,
-  .clients-grid,
   .cta-buttons,
   .split{
     grid-template-columns:1fr;
+  }
+  /* Swipeable horizontal cards on mobile instead of long vertical stack */
+  .services-grid,
+  .solutions-grid,
+  .projects-row,
+  .clients-grid{
+    display:flex;
+    grid-template-columns:none;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    gap:14px;
+    padding-bottom:14px;
+    margin:0 -20px;
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .services-grid::-webkit-scrollbar,
+  .solutions-grid::-webkit-scrollbar,
+  .projects-row::-webkit-scrollbar,
+  .clients-grid::-webkit-scrollbar{ display:none; }
+  .services-grid > *,
+  .solutions-grid > *,
+  .projects-row > *,
+  .clients-grid > *{
+    flex:0 0 85%;
+    scroll-snap-align:center;
+  }
+  .section-head{ position:relative; }
+  .section-head::after{
+    content:"← swipe →";
+    display:block;
+    font-size:11px;
+    color:var(--ink-soft);
+    opacity:0.6;
+    margin-top:8px;
+    letter-spacing:0.04em;
   }
   .about-wrap{
     padding:24px 20px;
