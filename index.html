@@ -459,7 +459,8 @@ nav.nav-hidden{
     overflow:hidden;
     box-shadow:0 6px 18px rgba(11,35,56,0.06);
   }
-  .client-shot img{ width:100%; display:block; }
+  .client-shot img{ width:100%; display:block; cursor:zoom-in; transition:transform 0.3s ease; }
+  .client-shot:hover img{ transform:scale(1.03); }
 
   /* READY TO AUTOMATE - contact buttons section */
   .cta-section{
@@ -940,12 +941,12 @@ nav.nav-hidden{
       <p>Trusted by businesses across the USA, UK, Canada, and Australia.</p>
     </div>
     <div class="clients-grid" data-reveal-group>
-      <div class="client-shot" data-reveal="up" style="--i:0"><img src="image1.png" alt="Client review 1"></div>
-      <div class="client-shot" data-reveal="up" style="--i:1"><img src="image2.png" alt="Client review 2"></div>
-      <div class="client-shot" data-reveal="up" style="--i:2"><img src="image3.png" alt="Client review 3"></div>
-      <div class="client-shot" data-reveal="up" style="--i:3"><img src="image4.png" alt="Client review 4"></div>
-      <div class="client-shot" data-reveal="up" style="--i:4"><img src="image5.png" alt="Client review 5"></div>
-      <div class="client-shot" data-reveal="up" style="--i:3"><img src="image6.png" alt="Client review 4"></div>
+      <div class="client-shot" data-reveal="up" style="--i:0"><img src="image1.png" alt="Client review 1" onclick="openLightbox('image1.png')"></div>
+      <div class="client-shot" data-reveal="up" style="--i:1"><img src="image2.png" alt="Client review 2" onclick="openLightbox('image2.png')"></div>
+      <div class="client-shot" data-reveal="up" style="--i:2"><img src="image3.png" alt="Client review 3" onclick="openLightbox('image3.png')"></div>
+      <div class="client-shot" data-reveal="up" style="--i:3"><img src="image4.png" alt="Client review 4" onclick="openLightbox('image4.png')"></div>
+      <div class="client-shot" data-reveal="up" style="--i:4"><img src="image5.png" alt="Client review 5" onclick="openLightbox('image5.png')"></div>
+      <div class="client-shot" data-reveal="up" style="--i:3"><img src="image6.png" alt="Client review 4" onclick="openLightbox('image6.png')"></div>
     </div>
   </section>
 
