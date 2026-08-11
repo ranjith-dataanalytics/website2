@@ -755,7 +755,9 @@ nav.nav-hidden{
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
     touch-action:pan-x;
+    overscroll-behavior:contain;
     overscroll-behavior-x:contain;
+    overscroll-behavior-y:none;
     gap:14px;
     padding-bottom:4px;
     margin:0 -20px;
@@ -772,6 +774,7 @@ nav.nav-hidden{
   .clients-grid > *{
     flex:0 0 85%;
     scroll-snap-align:center;
+    scroll-snap-stop:always;
   }
   .section-head{ position:relative; }
   .carousel-dots{
