@@ -1109,7 +1109,7 @@ nav.nav-hidden{
   navEl.addEventListener('mouseleave', () => scheduleHide());
 </script>
 <script>
-  // Mobile swipe carousels: build dots, sync active dot, autoplay with manual pause
+  // Mobile swipe carousels: build dots, sync active dot, ONE gentle auto-nudge on arrival (no continuous autoplay)
   function setupCarousel(gridClass){
     const grid = document.querySelector('.' + gridClass);
     const dotsWrap = document.querySelector('.carousel-dots[data-for="' + gridClass + '"]');
@@ -1148,32 +1148,20 @@ nav.nav-hidden{
       scrollTimer = setTimeout(updateActiveDot, 80);
     }, { passive: true });
 
-    // Autoplay
-    let autoplayTimer;
-    let userInteracting = false;
-    let resumeTimer;
-
-    function playNext(){
-      const current = updateActiveDot();
-      const next = (current + 1) % cards.length;
-      cards[next].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
-    function startAutoplay(){
-      clearInterval(autoplayTimer);
-      autoplayTimer = setInterval(() => {
-        if (!userInteracting) playNext();
-      }, 3800);
-    }
-    function pauseForUser(){
-      userInteracting = true;
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => { userInteracting = false; }, 5000);
-    }
-    grid.addEventListener('touchstart', pauseForUser, { passive: true });
-    grid.addEventListener('mousedown', pauseForUser);
-    grid.addEventListener('wheel', pauseForUser, { passive: true });
-
-    startAutoplay();
+    // ONE-TIME nudge: when this carousel scrolls into view, gently move to card 2 once, then stop forever
+    let hasNudged = false;
+    const nudgeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !hasNudged) {
+          hasNudged = true;
+          setTimeout(() => {
+            if (cards[1]) cards[1].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          }, 700);
+          nudgeObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    nudgeObserver.observe(grid);
   }
 
   ['services-grid','solutions-grid','projects-row','clients-grid'].forEach(setupCarousel);
