@@ -461,6 +461,7 @@ nav.nav-hidden{
   }
   .client-shot img{ width:100%; display:block; cursor:zoom-in; transition:transform 0.3s ease; }
   .client-shot:hover img{ transform:scale(1.03); }
+  .carousel-dots{ display:none; }
 
   /* READY TO AUTOMATE - contact buttons section */
   .cta-section{
@@ -750,10 +751,13 @@ nav.nav-hidden{
     display:flex;
     grid-template-columns:none;
     overflow-x:auto;
+    overflow-y:hidden;
     scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;
+    touch-action:pan-x;
+    overscroll-behavior-x:contain;
     gap:14px;
-    padding-bottom:14px;
+    padding-bottom:4px;
     margin:0 -20px;
     padding-left:20px;
     padding-right:20px;
@@ -770,14 +774,22 @@ nav.nav-hidden{
     scroll-snap-align:center;
   }
   .section-head{ position:relative; }
-  .section-head::after{
-    content:"← swipe →";
-    display:block;
-    font-size:11px;
-    color:var(--ink-soft);
-    opacity:0.6;
-    margin-top:8px;
-    letter-spacing:0.04em;
+  .carousel-dots{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    margin-top:14px;
+  }
+  .carousel-dots span{
+    width:7px; height:7px;
+    border-radius:50%;
+    background:var(--line);
+    transition:background 0.25s ease, transform 0.25s ease;
+    cursor:pointer;
+  }
+  .carousel-dots span.active{
+    background:var(--gold-400);
+    transform:scale(1.3);
   }
   .about-wrap{
     padding:24px 20px;
@@ -900,6 +912,7 @@ nav.nav-hidden{
         <ul><li>End-to-end automation</li><li>API integrations</li><li>Email &amp; PDF automation</li><li>Custom solutions</li></ul>
          </div>
     </div>
+    <div class="carousel-dots" data-for="services-grid"></div>
   </section>
 
   <section class="section" id="solutions">
@@ -933,6 +946,7 @@ nav.nav-hidden{
         <p>Automate approvals, emails, reports, PDFs, and repetitive tasks.</p>
       </div>
     </div>
+    <div class="carousel-dots" data-for="solutions-grid"></div>
   </section>
 
   <section class="section" id="projects">
@@ -966,6 +980,7 @@ nav.nav-hidden{
         <div class="proj-info"><div class="t">Retail Inventory &amp; Daily Stock Management</div><div class="s">Google Sheets + Automation</div></div>
       </div>
     </div>
+    <div class="carousel-dots" data-for="projects-row"></div>
   </section>
 
   <section class="section" id="clients">
@@ -981,6 +996,7 @@ nav.nav-hidden{
       <div class="client-shot" data-reveal="up" style="--i:4"><img src="image5.png" alt="Client review 5" onclick="openLightbox('image5.png')"></div>
       <div class="client-shot" data-reveal="up" style="--i:3"><img src="image6.png" alt="Client review 4" onclick="openLightbox('image6.png')"></div>
     </div>
+    <div class="carousel-dots" data-for="clients-grid"></div>
   </section>
 
   <section class="cta-section" id="get-started" data-reveal="up">
@@ -1088,6 +1104,76 @@ nav.nav-hidden{
 
   navEl.addEventListener('mouseenter', () => clearTimeout(hideTimer));
   navEl.addEventListener('mouseleave', () => scheduleHide());
+</script>
+<script>
+  // Mobile swipe carousels: build dots, sync active dot, autoplay with manual pause
+  function setupCarousel(gridClass){
+    const grid = document.querySelector('.' + gridClass);
+    const dotsWrap = document.querySelector('.carousel-dots[data-for="' + gridClass + '"]');
+    if (!grid || !dotsWrap) return;
+    const cards = Array.from(grid.children);
+    if (cards.length === 0) return;
+
+    dotsWrap.innerHTML = '';
+    cards.forEach((_, i) => {
+      const dot = document.createElement('span');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function updateActiveDot(){
+      const gridRect = grid.getBoundingClientRect();
+      const gridCenter = gridRect.left + gridRect.width / 2;
+      let closestIndex = 0, closestDist = Infinity;
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const cardCenter = r.left + r.width / 2;
+        const dist = Math.abs(cardCenter - gridCenter);
+        if (dist < closestDist) { closestDist = dist; closestIndex = i; }
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === closestIndex));
+      return closestIndex;
+    }
+
+    let scrollTimer;
+    grid.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(updateActiveDot, 80);
+    }, { passive: true });
+
+    // Autoplay
+    let autoplayTimer;
+    let userInteracting = false;
+    let resumeTimer;
+
+    function playNext(){
+      const current = updateActiveDot();
+      const next = (current + 1) % cards.length;
+      cards[next].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+    function startAutoplay(){
+      clearInterval(autoplayTimer);
+      autoplayTimer = setInterval(() => {
+        if (!userInteracting) playNext();
+      }, 3800);
+    }
+    function pauseForUser(){
+      userInteracting = true;
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => { userInteracting = false; }, 5000);
+    }
+    grid.addEventListener('touchstart', pauseForUser, { passive: true });
+    grid.addEventListener('mousedown', pauseForUser);
+    grid.addEventListener('wheel', pauseForUser, { passive: true });
+
+    startAutoplay();
+  }
+
+  ['services-grid','solutions-grid','projects-row','clients-grid'].forEach(setupCarousel);
 </script>
 
 </body>
