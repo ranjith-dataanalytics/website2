@@ -1126,7 +1126,9 @@ nav.nav-hidden{
       const dot = document.createElement('span');
       if (i === 0) dot.classList.add('active');
       dot.addEventListener('click', () => {
-        cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        const target = cards[i];
+        const offset = target.offsetLeft - (grid.clientWidth - target.clientWidth) / 2;
+        grid.scrollTo({ left: offset, behavior: 'smooth' });
       });
       dotsWrap.appendChild(dot);
     });
@@ -1152,14 +1154,19 @@ nav.nav-hidden{
       scrollTimer = setTimeout(updateActiveDot, 80);
     }, { passive: true });
 
-    // ONE-TIME nudge: when this carousel scrolls into view, gently move to card 2 once, then stop forever
+    // ONE-TIME nudge: when this carousel scrolls into view, gently slide to card 2 once, then stop forever.
+    // Uses scrollTo() on the row itself (horizontal only) — never touches the page's vertical scroll.
     let hasNudged = false;
     const nudgeObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !hasNudged) {
           hasNudged = true;
           setTimeout(() => {
-            if (cards[1]) cards[1].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            const target = cards[1];
+            if (target) {
+              const offset = target.offsetLeft - (grid.clientWidth - target.clientWidth) / 2;
+              grid.scrollTo({ left: offset, behavior: 'smooth' });
+            }
           }, 700);
           nudgeObserver.disconnect();
         }
