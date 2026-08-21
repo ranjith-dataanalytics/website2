@@ -17,10 +17,11 @@
     --blue-500:#3C8DC0;
     --gold-400:#F0AE4E;
     --gold-300:#F5D68A;
-    --paper:#F7F5F0;
-    --ink:#0B2338;
-    --ink-soft:#5B6B78;
-    --line:#E4E1D8;
+    --paper:#0D1B2A;
+    --surface:#122A40;
+    --ink:#EDF1F4;
+    --ink-soft:#9FB4C4;
+    --line:rgba(255,255,255,0.10);
     --radius:14px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
@@ -85,8 +86,8 @@ nav.nav-hidden{
   .logo-text .name{
     font-family:'Fraunces', serif;
     font-weight:600;
-    font-size:17px;
-    color:var(--navy-800);
+    font-size:18px;
+    color:var(--ink);
     letter-spacing:0.01em;
   }
   .logo-text .tag{
@@ -98,9 +99,9 @@ nav.nav-hidden{
   .nav-links{
     display:flex;
     gap:34px;
-    font-size:14.5px;
+    font-size:15.5px;
     font-weight:500;
-    color:var(--navy-800);
+    color:var(--ink);
   }
   .nav-links a{
     position:relative;
@@ -117,12 +118,12 @@ nav.nav-hidden{
     border-radius:2px;
   }
   .nav-cta{
-    background:var(--navy-800);
-    color:#fff;
+    background:var(--gold-400);
+    color:var(--navy-900);
     padding:11px 20px;
     border-radius:9px;
-    font-size:13.5px;
-    font-weight:600;
+    font-size:14px;
+    font-weight:700;
     white-space:nowrap;
   }
 
@@ -230,7 +231,7 @@ nav.nav-hidden{
   .trust{
     display:grid;
     grid-template-columns:repeat(6,1fr);
-    background:#fff;
+    background:var(--surface);
     border-bottom:1px solid var(--line);
     padding:22px 48px;
   }
@@ -247,18 +248,18 @@ nav.nav-hidden{
     border-radius:50%;
     background:var(--paper);
     display:flex; align-items:center; justify-content:center;
-    color:var(--navy-700);
+    color:var(--gold-400);
     font-size:15px;
     flex-shrink:0;
   }
   .trust-text .num{
     font-weight:800;
-    font-size:15px;
-    color:var(--navy-800);
+    font-size:16.5px;
+    color:var(--ink);
     line-height:1.2;
   }
   .trust-text .label{
-    font-size:11.5px;
+    font-size:12.5px;
     color:var(--ink-soft);
   }
 
@@ -271,12 +272,12 @@ nav.nav-hidden{
     margin-bottom:22px;
   }
   .section-head h2{
-    font-size:26px;
-    color:var(--navy-800);
-    margin-bottom:6px;
+    font-size:30px;
+    color:var(--ink);
+    margin-bottom:8px;
   }
   .section-head p{
-    font-size:14.5px;
+    font-size:15.5px;
     color:var(--ink-soft);
   }
   .services-grid{
@@ -285,7 +286,7 @@ nav.nav-hidden{
     gap:14px;
   }
   .service-card{
-    background:#fff;
+    background:var(--surface);
     border:1px solid var(--line);
     border-radius:var(--radius);
     padding:18px 16px;
@@ -300,14 +301,14 @@ nav.nav-hidden{
     color:#fff;
   }
   .service-card h3{
-    font-size:15.5px;
+    font-size:17px;
     font-family:'Manrope', sans-serif;
     font-weight:700;
-    color:var(--navy-800);
+    color:var(--ink);
     margin-bottom:8px;
   }
   .service-card ul li{
-    font-size:13px;
+    font-size:13.5px;
     color:var(--ink-soft);
     margin-bottom:5px;
     padding-left:12px;
@@ -320,9 +321,9 @@ nav.nav-hidden{
   .service-card .learn{
     display:inline-block;
     margin-top:10px;
-    font-size:12px;
+    font-size:12.5px;
     font-weight:700;
-    color:var(--navy-600);
+    color:var(--gold-400);
   }
 
   /* PROJECTS + TESTIMONIAL */
@@ -337,7 +338,7 @@ nav.nav-hidden{
     gap:14px;
   }
   .proj-card{
-    background:#fff;
+    background:var(--surface);
     border:1px solid var(--line);
     border-radius:var(--radius);
     overflow:hidden;
@@ -353,8 +354,8 @@ nav.nav-hidden{
   .proj-thumb .b{ position:absolute; bottom:8px; left:8px; display:flex; gap:3px; align-items:flex-end; height:24px;}
   .proj-thumb .b span{ width:5px; background:var(--gold-400); border-radius:1px;}
   .proj-info{ padding:14px 16px; }
-  .proj-info .t{ font-size:15.5px; font-weight:700; color:var(--navy-800); margin-bottom:4px; font-family:'Manrope', sans-serif;}
-  .proj-info .s{ font-size:13px; color:var(--ink-soft);}
+  .proj-info .t{ font-size:17px; font-weight:700; color:var(--ink); margin-bottom:4px; font-family:'Manrope', sans-serif;}
+  .proj-info .s{ font-size:13.5px; color:var(--ink-soft);}
 
   .testimonial-card{
     background:#fff;
@@ -429,20 +430,20 @@ nav.nav-hidden{
     gap:14px;
   }
   .solution-card{
-    background:#fff;
+    background:var(--surface);
     border:1px solid var(--line);
     border-radius:var(--radius);
     padding:18px 16px;
   }
   .solution-card h3{
-    font-size:15.5px;
+    font-size:17px;
     font-family:'Manrope', sans-serif;
     font-weight:700;
-    color:var(--navy-800);
+    color:var(--ink);
     margin-bottom:6px;
   }
   .solution-card p{
-    font-size:13.5px;
+    font-size:14.5px;
     color:var(--ink-soft);
     line-height:1.5;
   }
